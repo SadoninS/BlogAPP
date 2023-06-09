@@ -20,6 +20,9 @@ form {
 .overLength {
   color: red;
 }
+.inputErrorMessage {
+  color: red;
+}
 
 .invisible {
   opacity: 0;
