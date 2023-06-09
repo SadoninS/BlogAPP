@@ -1,3 +1,6 @@
+h1 {
+  text-align: center;
+}
 main {
   display: flex;
   gap: 100px;
@@ -14,31 +17,10 @@ form {
   gap: 10px;
 }
 
-fieldset {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: #fff;
-}
-
-textarea {
-  overflow-y: visible;
-}
-
-.overLentghLimit {
+.overLength {
   color: red;
-  outline-color: red;
 }
 
-.default {
+.invisible {
   opacity: 0;
-}
-
-.default:after {
-  content: '.';
-  opacity: 0;
-}
-
-.post-title-validation-message.active {
-  opacity: 1;
 }

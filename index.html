@@ -15,6 +15,7 @@
   </head>
 
   <body>
+    <h1>Мой Блог</h1>
     <main>
       <section class="input-area">
         <h2 class="input-area__title">Новый пост</h2>
@@ -29,10 +30,11 @@
             type="text"
             autocomplete="off" />
           <label
-            class="post-title-validation-message default"
+            class="post-title-validation-message"
             for="post-title-input"
-            id="post-title-validation-message">
-          </label>
+            id="post-title-validation-message"
+            >0/20</label
+          >
           <textarea
             class="post-text-input"
             id="post-text-input"
@@ -43,13 +45,22 @@
           <label
             class="post-text-validation-message"
             for="post-text-input"
-            id="post-text-validation-message"></label>
+            id="post-text-validation-message"
+            >0/200</label
+          >
           <button
+            class="post-publish-btn"
             id="post-publish-btn"
             tabindex="3"
-            type="reset">
+            type="button">
             Опубликовать (Ctrl+Enter)
           </button>
+          <label
+            for="post-publish-btn"
+            id="inputErrorMessage"
+            class="inputErrorMessage invisible"
+            >Неправильно заполнена форма!
+          </label>
         </form>
       </section>
       <section class="output-area">

@@ -10,7 +10,10 @@ const postTextValidationMessage = document.querySelector(
   '#post-text-validation-message'
 );
 
+const inputErrorMessage = document.querySelector('#inputErrorMessage');
+
 const publishBtn = document.querySelector('#post-publish-btn');
+
 const posts = document.querySelector('#posts');
 const postsList = [];
 const post = {
@@ -19,30 +22,38 @@ const post = {
 };
 
 function getPostFromUser(postTitleFromUser, postTextFromUser) {
-  post.title = postTitleFromUser.value;
-  post.text = postTextFromUser.value;
-
+  post.title = postTitleFromUser.value.trim();
+  post.text = postTextFromUser.value.trim();
   return post;
 }
 
-function validationPassed(post) {
-  if (lengthValidation(post) && emptyStringValidation(post)) return true;
-  else return false;
+function emptyStringValidation(post) {
+  return post.title !== '' && post.text !== '';
 }
 
 function lengthValidation(post) {
-  if (post.title.length < 30) return true;
-  else {
-    postTitleValidationMessage.textContent =
-      'Вы превысили длину заголовка! лимит - 30 симолов!';
-  }
-  return false;
+  return post.title.length < 30 && post.text.length < 200;
 }
 
-function emptyStringValidation(post) {
-  if (post.title !== '' && post.text !== '') return true;
-  else return false;
+function validationPassed(post) {
+  return lengthValidation(post) && emptyStringValidation(post);
 }
+
+postTitleFromUser.addEventListener('input', function () {
+  if (postTitleFromUser.value.length >= 0)
+    postTitleValidationMessage.innerText = `${postTitleFromUser.value.length}/20`;
+  postTitleValidationMessage.classList.remove('overLength');
+  if (postTitleFromUser.value.length > 20)
+    postTitleValidationMessage.classList.add('overLength');
+});
+
+postTextFromUser.addEventListener('input', function () {
+  if (postTextFromUser.value.length >= 0)
+    postTextValidationMessage.innerText = `${postTextFromUser.value.length}/200`;
+  postTextValidationMessage.classList.remove('overLength');
+  if (postTextFromUser.value.length > 200)
+    postTextValidationMessage.classList.add('overLength');
+});
 
 function createPost(post) {
   postsList.push(
@@ -50,52 +61,56 @@ function createPost(post) {
   );
   postTitleFromUser.value = '';
   postTextFromUser.value = '';
-  postTitleValidationMessage.className = 'default';
 }
 
 function renderPosts(postsList) {
   posts.innerHTML = postsList.join('');
 }
+function resetValidationMessages(
+  postTitleValidationMessage,
+  postTextValidationMessage
+) {
+  postTitleValidationMessage.innerText = '0/20';
+  postTextValidationMessage.innerText = '0/200';
+  postTitleValidationMessage.classList.remove('overLength');
+  postTextValidationMessage.classList.remove('overLength');
+}
 
-postTitleFromUser.addEventListener('input', function () {
-  if (postTitleFromUser.value.length !== 0) {
-    postTitleValidationMessage.classList.add('active');
-    postTitleValidationMessage.innerHTML = `Вы ввели ${postTitleFromUser.value.length} символов`;
-    postTitleFromUser.classList.remove('overLentghLimit');
-  }
-  if (postTitleFromUser.value.length > 30) {
-    postTitleFromUser.className = 'overLentghLimit';
-    postTitleValidationMessage.className = 'overLentghLimit';
-  }
+function showErrorMessage(inputErrorMessage) {
+  if (!validationPassed(post)) inputErrorMessage.classList.remove('invisible');
+}
 
-  if (postTitleFromUser.value.length < 30) {
-    postTitleFromUser.classList.remove('overLentghLimit');
-    postTitleValidationMessage.classList.remove('overLentghLimit');
-  }
+function hideErrorMessage(inputErrorMessage) {
+  inputErrorMessage.classList.add('invisible');
+}
 
-  if (!postTitleFromUser.value) {
-    postTitleValidationMessage.classList.add('overLentghLimit');
-    postTitleValidationMessage.textContent =
-      'Вы пытаетесь опубликовать пост без заголовка!';
-  }
-});
-
-publishBtn.addEventListener('click', function (event) {
+publishBtn.addEventListener('click', function () {
   getPostFromUser(postTitleFromUser, postTextFromUser);
-  console.log(validationPassed(post));
-  if (validationPassed(post)) createPost(post);
-  renderPosts(postsList);
-  console.log(postsList);
+  if (validationPassed(post)) {
+    createPost(post);
+    renderPosts(postsList);
+    resetValidationMessages(
+      postTitleValidationMessage,
+      postTextValidationMessage
+    );
+    hideErrorMessage(inputErrorMessage);
+  } else showErrorMessage(inputErrorMessage);
 });
 
 postTitleFromUser.addEventListener('keydown', function (event) {
   if (event.which == '13') event.preventDefault();
   if (event.which == '13' && event.ctrlKey) {
+    event.preventDefault();
     getPostFromUser(postTitleFromUser, postTextFromUser);
-    console.log(validationPassed(post));
-    if (validationPassed(post)) createPost(post);
-    renderPosts(postsList);
-    console.log(postsList);
+    if (validationPassed(post)) {
+      createPost(post);
+      renderPosts(postsList);
+      resetValidationMessages(
+        postTitleValidationMessage,
+        postTextValidationMessage
+      );
+      hideErrorMessage(inputErrorMessage);
+    } else showErrorMessage(inputErrorMessage);
   }
 });
 
@@ -103,9 +118,14 @@ postTextFromUser.addEventListener('keydown', function (event) {
   if (event.which == '13' && event.ctrlKey) {
     event.preventDefault();
     getPostFromUser(postTitleFromUser, postTextFromUser);
-    console.log(validationPassed(post));
-    if (validationPassed(post)) createPost(post);
-    renderPosts(postsList);
-    console.log(postsList);
+    if (validationPassed(post)) {
+      createPost(post);
+      renderPosts(postsList);
+      resetValidationMessages(
+        postTitleValidationMessage,
+        postTextValidationMessage
+      );
+      hideErrorMessage(inputErrorMessage);
+    } else showErrorMessage(inputErrorMessage);
   }
 });
