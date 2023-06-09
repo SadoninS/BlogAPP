@@ -11,6 +11,9 @@
     <title>Приложение Блог</title>
     <link
       rel="stylesheet"
+      href="reset.css" />
+    <link
+      rel="stylesheet"
       href="index.css" />
   </head>
 
@@ -33,7 +36,7 @@
             class="post-title-validation-message"
             for="post-title-input"
             id="post-title-validation-message"
-            >0/20</label
+            >0/50</label
           >
           <textarea
             class="post-text-input"
@@ -46,7 +49,7 @@
             class="post-text-validation-message"
             for="post-text-input"
             id="post-text-validation-message"
-            >0/200</label
+            >0/1000</label
           >
           <button
             class="post-publish-btn"
@@ -64,10 +67,12 @@
         </form>
       </section>
       <section class="output-area">
-        <h2 class="output-area_title">Лента</h2>
+        <h2 class="output-area__title">Лента</h2>
         <output
+          class="posts"
           id="posts"
-          for="post-from-user">
+          for="post-from-user"
+          ><h3 class="emptyPosts">Тут пока пусто...</h3>
         </output>
       </section>
     </main>
