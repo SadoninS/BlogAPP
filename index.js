@@ -32,7 +32,7 @@ function emptyStringValidation(post) {
 }
 
 function lengthValidation(post) {
-  return post.title.length < 30 && post.text.length < 200;
+  return post.title.length < 20 && post.text.length < 200;
 }
 
 function validationPassed(post) {
