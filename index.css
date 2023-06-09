@@ -1,0 +1,44 @@
+main {
+  display: flex;
+  gap: 100px;
+  justify-content: space-around;
+}
+
+section {
+  width: 35vw;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #fff;
+}
+
+textarea {
+  overflow-y: visible;
+}
+
+.overLentghLimit {
+  color: red;
+  outline-color: red;
+}
+
+.default {
+  opacity: 0;
+}
+
+.default:after {
+  content: '.';
+  opacity: 0;
+}
+
+.post-title-validation-message.active {
+  opacity: 1;
+}

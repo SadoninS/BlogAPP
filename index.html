@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Приложение Блог</title>
+    <link
+      rel="stylesheet"
+      href="index.css" />
+  </head>
+
+  <body>
+    <main>
+      <section class="input-area">
+        <h2 class="input-area__title">Новый пост</h2>
+        <form
+          id="post-from-user"
+          novalidate>
+          <input
+            class="post-title-input"
+            id="post-title-input"
+            tabindex="1"
+            placeholder="Заголовок"
+            type="text"
+            autocomplete="off" />
+          <label
+            class="post-title-validation-message default"
+            for="post-title-input"
+            id="post-title-validation-message">
+          </label>
+          <textarea
+            class="post-text-input"
+            id="post-text-input"
+            tabindex="2"
+            placeholder="Текст поста"
+            type="text"
+            rows="10"></textarea>
+          <label
+            class="post-text-validation-message"
+            for="post-text-input"
+            id="post-text-validation-message"></label>
+          <button
+            id="post-publish-btn"
+            tabindex="3"
+            type="reset">
+            Опубликовать (Ctrl+Enter)
+          </button>
+        </form>
+      </section>
+      <section class="output-area">
+        <h2 class="output-area_title">Лента</h2>
+        <output
+          id="posts"
+          for="post-from-user">
+        </output>
+      </section>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>
