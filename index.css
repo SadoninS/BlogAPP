@@ -1,5 +1,24 @@
+body {
+  width: 1400px;
+  margin: 0 auto;
+}
 h1 {
+  margin-bottom: 30px;
   text-align: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 55px;
+  line-height: 60px;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
 }
 main {
   display: flex;
@@ -8,19 +27,106 @@ main {
 }
 
 section {
-  width: 35vw;
+  width: calc(40% - 30px);
 }
 
 form {
   display: flex;
   flex-direction: column;
+  align-items: end;
   gap: 10px;
 }
 
-.overLength {
-  color: red;
+.post-title-input,
+.post-text-input {
+  width: 100%;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  padding: 10px 20px;
+  border: 1px solid black;
+}
+.post-title-input {
+  height: 60px;
+}
+
+.post-text-input {
+  height: 350px;
+}
+
+.post-title-validation-message,
+.post-text-validation-message {
+  font-size: 32px;
+  line-height: 39px;
+}
+
+.post-publish-btn {
+  width: 100%;
+  height: 60px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+  color: white;
+  border-style: none;
+  background-color: #0094ff;
 }
 .inputErrorMessage {
+  font-size: 38px;
+  line-height: 45px;
+  color: red;
+}
+
+/* output */
+.posts {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.emptyPosts {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  opacity: 0.5;
+}
+.post-date {
+  margin-bottom: 15px;
+  color: blue;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 30px;
+}
+.post-title {
+  margin-bottom: 15px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  word-wrap: break-word;
+}
+.post-text {
+  margin-bottom: 50px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 30px;
+  word-wrap: break-word;
+}
+
+/* стили из JS */
+.borderRed {
+  border: 1px solid red;
+  color: red;
+}
+.overLength {
   color: red;
 }
 
