@@ -59,7 +59,7 @@ function showSubmitErrorMessage(inputErrorMessageNode) {
   }
 }
 
-function hideErrorMessage(inputErrorMessageNode) {
+function hideSubmitErrorMessage(inputErrorMessageNode) {
   inputErrorMessageNode.classList.add('invisible');
 }
 
@@ -72,7 +72,7 @@ function submitFormByClick() {
       postTitleValidationMessageNode,
       postTextValidationMessageNode
     );
-    hideErrorMessage(inputErrorMessageNode);
+    hideSubmitErrorMessage(inputErrorMessageNode);
   } else showSubmitErrorMessage(inputErrorMessageNode);
 }
 
@@ -88,7 +88,7 @@ function submitFormByCltrlEnterInTitleInput(event) {
         postTitleValidationMessageNode,
         postTextValidationMessageNode
       );
-      hideErrorMessage(inputErrorMessageNode);
+      hideSubmitErrorMessage(inputErrorMessageNode);
     } else showSubmitErrorMessage(inputErrorMessageNode);
   }
 }
@@ -104,7 +104,7 @@ function submitFormByCtrlEnterInTextInput(event) {
         postTitleValidationMessageNode,
         postTextValidationMessageNode
       );
-      hideErrorMessage(inputErrorMessageNode);
+      hideSubmitErrorMessage(inputErrorMessageNode);
     } else showSubmitErrorMessage(inputErrorMessageNode);
   }
 }
