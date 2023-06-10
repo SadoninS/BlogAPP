@@ -43,8 +43,7 @@
             id="post-text-input"
             tabindex="2"
             placeholder="Текст поста"
-            type="text"
-            rows="10"></textarea>
+            type="text"></textarea>
           <label
             class="post-text-validation-message"
             for="post-text-input"
@@ -67,12 +66,20 @@
         </form>
       </section>
       <section class="output-area">
-        <h2 class="output-area__title">Лента</h2>
+        <h2
+          class="output-area__title"
+          id="output-area__title">
+          <p>Лента</p>
+          <button
+            class="clearPostsListBtn invisible"
+            id="clearPostsList">
+            Очистить
+          </button>
+        </h2>
         <output
           class="posts"
           id="posts"
-          for="post-from-user"
-          ><h3 class="emptyPosts">Тут пока пусто...</h3>
+          for="post-from-user">
         </output>
       </section>
     </main>

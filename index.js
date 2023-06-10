@@ -1,5 +1,3 @@
-const form = document.querySelector('#post-from-user');
-
 const postTitleFromUser = document.querySelector('#post-title-input');
 const postTextFromUser = document.querySelector('#post-text-input');
 
@@ -14,8 +12,33 @@ const inputErrorMessage = document.querySelector('#inputErrorMessage');
 
 const publishBtn = document.querySelector('#post-publish-btn');
 
-const posts = document.querySelector('#posts');
-const postsList = [];
+const postListClearBtnNode = document.querySelector('#clearPostsList');
+
+let postsEmptyStartMessage =
+  '<h3 class="emptyPosts">Тут пока ничего нет... </h3>';
+let postsEmptyRefreshMessage =
+  '<h3 class="emptyPosts">Ah, shit, here we go again...</h3>';
+
+const postsNode = document.querySelector('#posts');
+postsNode.innerHTML = postsEmptyStartMessage;
+
+postListClearBtnNode.addEventListener('click', function () {
+  localStorage.clear();
+  renderPosts((postsList = []));
+  postsNode.innerHTML = postsEmptyRefreshMessage;
+  postListClearBtnNode.classList.add('invisible');
+});
+
+let postsList = [];
+let postListStorage = localStorage.getItem('postlist');
+postListStorage = JSON.parse(localStorage.getItem('postlist'));
+
+if (Array.isArray(postListStorage)) {
+  postsList = postListStorage;
+  renderPosts(postsList);
+  postListClearBtnNode.classList.remove('invisible');
+} else postsList = [];
+
 const post = {
   date: '',
   title: '',
@@ -78,14 +101,21 @@ postTextFromUser.addEventListener('input', function () {
 
 function createPost(post) {
   postsList.push(
-    (posts.innerHTML = `<div class="post"><p class='post-date'>${post.date}</p><h3 class='post-title'>${post.title}</h3><p class='post-text'>${post.text}</p></div>`)
+    (postsNode.innerHTML = `<div class="post">
+                          <p class='post-date'>${post.date}</p>
+                          <h3 class='post-title'>${post.title}</h3>
+                          <p class='post-text'>${post.text}</p>
+                        </div>`)
   );
+  const postListStorage = JSON.stringify(postsList);
+  localStorage.setItem('postlist', postListStorage);
   postTitleFromUser.value = '';
   postTextFromUser.value = '';
+  postListClearBtnNode.classList.remove('invisible');
 }
 
 function renderPosts(postsList) {
-  posts.innerHTML = postsList.join('');
+  postsNode.innerHTML = postsList.join('');
 }
 function resetValidationMessages(
   postTitleValidationMessage,
@@ -97,7 +127,7 @@ function resetValidationMessages(
   postTextValidationMessage.classList.remove('overLength');
 }
 
-function showErrorMessage(inputErrorMessage) {
+function showSubmitErrorMessage(inputErrorMessage) {
   if (!validationPassed(post)) {
     inputErrorMessage.classList.remove('invisible');
   }
@@ -117,7 +147,7 @@ publishBtn.addEventListener('click', function () {
       postTextValidationMessage
     );
     hideErrorMessage(inputErrorMessage);
-  } else showErrorMessage(inputErrorMessage);
+  } else showSubmitErrorMessage(inputErrorMessage);
 });
 
 postTitleFromUser.addEventListener('keydown', function (event) {
@@ -133,7 +163,7 @@ postTitleFromUser.addEventListener('keydown', function (event) {
         postTextValidationMessage
       );
       hideErrorMessage(inputErrorMessage);
-    } else showErrorMessage(inputErrorMessage);
+    } else showSubmitErrorMessage(inputErrorMessage);
   }
 });
 
@@ -149,6 +179,6 @@ postTextFromUser.addEventListener('keydown', function (event) {
         postTextValidationMessage
       );
       hideErrorMessage(inputErrorMessage);
-    } else showErrorMessage(inputErrorMessage);
+    } else showSubmitErrorMessage(inputErrorMessage);
   }
 });
