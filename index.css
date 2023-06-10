@@ -117,9 +117,6 @@ form {
 }
 
 .emptyPosts {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
   font-size: 32px;
   line-height: 40px;
   opacity: 0.5;
@@ -168,6 +165,11 @@ form {
     font-size: 45px;
     line-height: 50px;
   }
+  h2 {
+    margin-bottom: 15px;
+    font-size: 30px;
+    line-height: 35px;
+  }
 
   main {
     flex-direction: column;
@@ -211,5 +213,10 @@ form {
     font-size: 22px;
     line-height: 30px;
     color: red;
+  }
+
+  .emptyPosts {
+    font-size: 22px;
+    line-height: 30px;
   }
 }
