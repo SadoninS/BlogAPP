@@ -176,9 +176,26 @@ form {
   section {
     width: 100%;
   }
+  .post-title-input,
+  .post-text-input {
+    width: 100%;
+    padding: 5px;
+    font-size: 25px;
+    line-height: 35px;
+    border: 1px solid black;
+  }
+  .post-title-input {
+    height: 35px;
+  }
 
   .post-text-input {
     height: 200px;
+  }
+
+  .post-title-validation-message,
+  .post-text-validation-message {
+    font-size: 25px;
+    line-height: 30px;
   }
 
   .post-publish-btn:before {
@@ -191,8 +208,8 @@ form {
 
   .inputErrorMessage {
     margin-bottom: 10px;
-    font-size: 35px;
-    line-height: 40px;
+    font-size: 22px;
+    line-height: 30px;
     color: red;
   }
 }
