@@ -38,6 +38,8 @@ section {
   width: 45%;
 }
 
+/* Input */
+
 form {
   display: flex;
   flex-direction: column;
@@ -50,7 +52,6 @@ form {
   padding: 10px 20px;
   font-size: 32px;
   line-height: 40px;
-
   border: 1px solid black;
 }
 .post-title-input {
@@ -74,7 +75,16 @@ form {
   line-height: 39px;
   color: white;
   background-color: #0094ff;
+  cursor: pointer;
 }
+
+.post-publish-btn:before {
+  content: 'Опубликовать (Ctrl+Enter)';
+  font-size: 28px;
+  line-height: 39px;
+  color: white;
+}
+
 .inputErrorMessage {
   margin-bottom: 30px;
   font-size: 38px;
@@ -83,7 +93,6 @@ form {
 }
 
 /* output */
-
 .output-area__title {
   position: relative;
   display: flex;
@@ -99,11 +108,14 @@ form {
   background-color: #0094ff;
   color: white;
   text-align: center;
+  cursor: pointer;
 }
+
 .posts {
   display: flex;
   flex-direction: column-reverse;
 }
+
 .emptyPosts {
   font-family: 'Inter';
   font-style: normal;
@@ -112,6 +124,7 @@ form {
   line-height: 40px;
   opacity: 0.5;
 }
+
 .post-date {
   margin-bottom: 15px;
   color: #0094ff;
@@ -119,6 +132,7 @@ form {
   font-size: 25px;
   line-height: 30px;
 }
+
 .post-title {
   margin-bottom: 15px;
   font-weight: 700;
@@ -126,6 +140,7 @@ form {
   line-height: 39px;
   word-wrap: break-word;
 }
+
 .post-text {
   margin-bottom: 50px;
   font-size: 25px;
@@ -138,6 +153,7 @@ form {
   border: 2px solid red;
   color: red;
 }
+
 .overLength {
   color: red;
 }
@@ -146,12 +162,31 @@ form {
   opacity: 0;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   main {
     flex-direction: column;
     padding-inline: 25px;
   }
   section {
     width: 100%;
+  }
+
+  .post-text-input {
+    height: 200px;
+  }
+
+  .post-publish-btn:before {
+    cursor: pointer;
+    content: 'Опубликовать';
+    font-size: 28px;
+    line-height: 39px;
+    color: white;
+  }
+
+  .inputErrorMessage {
+    margin-bottom: 10px;
+    font-size: 35px;
+    line-height: 40px;
+    color: red;
   }
 }
