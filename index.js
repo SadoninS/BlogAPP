@@ -1,120 +1,53 @@
 const POSTS_LIST_LOCAL_STORAGE_KEY = 'postlist';
-const POSTS_EMPTY_INIT_MESSAGE =
+const POSTS_EMPTY_INIT_HTML =
   '<h3 class="emptyPosts">Тут пока ничего нет... </h3>';
-const POST_EMPTY_REFRESH_MESSAGE =
+const POSTS_EMPTY_REFRESH_HTML =
   '<h3 class="emptyPosts">Ah, shit, here we go again...</h3>';
 
 const postTitleFromUser = document.querySelector('#post-title-input');
 const postTextFromUser = document.querySelector('#post-text-input');
 
-const postTitleValidationMessage = document.querySelector(
+const postTitleValidationMessageNode = document.querySelector(
   '#post-title-validation-message'
 );
-const postTextValidationMessage = document.querySelector(
+const postTextValidationMessageNode = document.querySelector(
   '#post-text-validation-message'
 );
-
-const inputErrorMessage = document.querySelector('#inputErrorMessage');
-
 const publishBtnNode = document.querySelector('#post-publish-btn');
+const inputErrorMessageNode = document.querySelector('#inputErrorMessage');
 
 const postListClearBtnNode = document.querySelector('#clearPostsList');
 
 const postsNode = document.querySelector('#posts');
-postsNode.innerHTML = POSTS_EMPTY_INIT_MESSAGE;
+postsNode.innerHTML = POSTS_EMPTY_INIT_HTML;
 
-postListClearBtnNode.addEventListener('click', function () {
-  localStorage.clear();
-  renderPosts((postsList = []));
-  postsNode.innerHTML = POST_EMPTY_REFRESH_MESSAGE;
-  postListClearBtnNode.classList.add('invisible');
-});
-
-// let postsList = [];
 let postListStorage = localStorage.getItem(POSTS_LIST_LOCAL_STORAGE_KEY);
 checkStorageAndInitPostsList();
-
 const post = {
   date: '',
   title: '',
   text: '',
 };
 
-postTitleFromUser.addEventListener('input', function () {
-  inputErrorMessage.classList.add('invisible');
-  if (postTitleFromUser.value.length >= 0) {
-    postTitleValidationMessage.innerText = `${postTitleFromUser.value.length}/50`;
-    postTitleValidationMessage.classList.remove('overLength');
-    postTitleFromUser.classList.remove('borderRed');
-  }
-  if (postTitleFromUser.value.length > 50) {
-    postTitleValidationMessage.classList.add('overLength');
-    postTitleFromUser.classList.add('borderRed');
-  }
-});
+publishBtnNode.addEventListener('click', (e) => submitFormByClick(e));
 
-postTextFromUser.addEventListener('input', function () {
-  inputErrorMessage.classList.add('invisible');
-  if (postTextFromUser.value.length >= 0) {
-    postTextValidationMessage.innerText = `${postTextFromUser.value.length}/1000`;
-    postTextValidationMessage.classList.remove('overLength');
-    postTextFromUser.classList.remove('borderRed');
-  }
-  if (postTextFromUser.value.length > 1000) {
-    postTextValidationMessage.classList.add('overLength');
-    postTextFromUser.classList.add('borderRed');
-  }
-});
+postTitleFromUser.addEventListener('input', (e) => validationTitleInput(e));
 
-publishBtnNode.addEventListener('click', function () {
-  getPostFromUser(postTitleFromUser, postTextFromUser);
-  if (validationPassed(post)) {
-    createPost(post);
-    renderPosts(postsList);
-    resetValidationMessages(
-      postTitleValidationMessage,
-      postTextValidationMessage
-    );
-    hideErrorMessage(inputErrorMessage);
-  } else showSubmitErrorMessage(inputErrorMessage);
-});
+postTitleFromUser.addEventListener('keydown', (e) =>
+  submitFormByCltrlEnterInTitleInput(e)
+);
 
-postTitleFromUser.addEventListener('keydown', function (event) {
-  if (event.which == '13') event.preventDefault();
-  if (event.which == '13' && event.ctrlKey) {
-    event.preventDefault();
-    getPostFromUser(postTitleFromUser, postTextFromUser);
-    if (validationPassed(post)) {
-      createPost(post);
-      renderPosts(postsList);
-      resetValidationMessages(
-        postTitleValidationMessage,
-        postTextValidationMessage
-      );
-      hideErrorMessage(inputErrorMessage);
-    } else showSubmitErrorMessage(inputErrorMessage);
-  }
-});
+postTextFromUser.addEventListener('input', (e) => validationTextInput(e));
 
-postTextFromUser.addEventListener('keydown', function (event) {
-  if (event.which == '13' && event.ctrlKey) {
-    event.preventDefault();
-    getPostFromUser(postTitleFromUser, postTextFromUser);
-    if (validationPassed(post)) {
-      createPost(post);
-      renderPosts(postsList);
-      resetValidationMessages(
-        postTitleValidationMessage,
-        postTextValidationMessage
-      );
-      hideErrorMessage(inputErrorMessage);
-    } else showSubmitErrorMessage(inputErrorMessage);
-  }
-});
+postTextFromUser.addEventListener('keydown', (e) =>
+  submitFormByCtrlEnterInTextInput(e)
+);
 
-function renderPosts(postsList) {
-  postsNode.innerHTML = postsList.join('');
-}
+postListClearBtnNode.addEventListener('click', (e) =>
+  clearLocalStorageAndRefreshLayout(e)
+);
+
+//Сломал весь мозг на том, как унести нижеследующие функции в другой файл, но понял что нужно переписать логику всего приложения и добиться чистоты функций, посему эти функции поживут здесь.
 
 function checkStorageAndInitPostsList() {
   postListStorage = JSON.parse(
@@ -125,4 +58,8 @@ function checkStorageAndInitPostsList() {
     renderPosts(postsList);
     postListClearBtnNode.classList.remove('invisible');
   } else postsList = [];
+}
+
+function renderPosts(postsList) {
+  postsNode.innerHTML = postsList.join('');
 }

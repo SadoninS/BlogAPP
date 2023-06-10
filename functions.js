@@ -1,25 +1,25 @@
 function validationInputTitleFromUser() {
-  inputErrorMessage.classList.add('invisible');
+  inputErrorMessageNode.classList.add('invisible');
   if (postTitleFromUser.value.length >= 0) {
-    postTitleValidationMessage.innerText = `${postTitleFromUser.value.length}/50`;
-    postTitleValidationMessage.classList.remove('overLength');
+    postTitleValidationMessageNode.innerText = `${postTitleFromUser.value.length}/50`;
+    postTitleValidationMessageNode.classList.remove('overLength');
     postTitleFromUser.classList.remove('borderRed');
   }
   if (postTitleFromUser.value.length > 50) {
-    postTitleValidationMessage.classList.add('overLength');
+    postTitleValidationMessageNode.classList.add('overLength');
     postTitleFromUser.classList.add('borderRed');
   }
 }
 
 function validationInputTextFromUser() {
-  inputErrorMessage.classList.add('invisible');
+  inputErrorMessageNode.classList.add('invisible');
   if (postTextFromUser.value.length >= 0) {
-    postTextValidationMessage.innerText = `${postTextFromUser.value.length}/1000`;
-    postTextValidationMessage.classList.remove('overLength');
+    postTextValidationMessageNode.innerText = `${postTextFromUser.value.length}/1000`;
+    postTextValidationMessageNode.classList.remove('overLength');
     postTextFromUser.classList.remove('borderRed');
   }
   if (postTextFromUser.value.length > 1000) {
-    postTextValidationMessage.classList.add('overLength');
+    postTextValidationMessageNode.classList.add('overLength');
     postTextFromUser.classList.add('borderRed');
   }
 }
@@ -68,21 +68,100 @@ function createPost(post) {
 }
 
 function resetValidationMessages(
-  postTitleValidationMessage,
-  postTextValidationMessage
+  postTitleValidationMessageNode,
+  postTextValidationMessageNode
 ) {
-  postTitleValidationMessage.innerText = '0/50';
-  postTextValidationMessage.innerText = '0/1000';
-  postTitleValidationMessage.classList.remove('overLength');
-  postTextValidationMessage.classList.remove('overLength');
+  postTitleValidationMessageNode.innerText = '0/50';
+  postTextValidationMessageNode.innerText = '0/1000';
+  postTitleValidationMessageNode.classList.remove('overLength');
+  postTextValidationMessageNode.classList.remove('overLength');
 }
 
-function showSubmitErrorMessage(inputErrorMessage) {
+function showSubmitErrorMessage(inputErrorMessageNode) {
   if (!validationPassed(post)) {
-    inputErrorMessage.classList.remove('invisible');
+    inputErrorMessageNode.classList.remove('invisible');
   }
 }
 
-function hideErrorMessage(inputErrorMessage) {
-  inputErrorMessage.classList.add('invisible');
+function hideErrorMessage(inputErrorMessageNode) {
+  inputErrorMessageNode.classList.add('invisible');
+}
+
+function validationTextInput() {
+  inputErrorMessageNode.classList.add('invisible');
+  if (postTextFromUser.value.length >= 0) {
+    postTextValidationMessageNode.innerText = `${postTextFromUser.value.length}/1000`;
+    postTextValidationMessageNode.classList.remove('overLength');
+    postTextFromUser.classList.remove('borderRed');
+  }
+  if (postTextFromUser.value.length > 1000) {
+    postTextValidationMessageNode.classList.add('overLength');
+    postTextFromUser.classList.add('borderRed');
+  }
+}
+
+function validationTitleInput() {
+  inputErrorMessageNode.classList.add('invisible');
+  if (postTitleFromUser.value.length >= 0) {
+    postTitleValidationMessageNode.innerText = `${postTitleFromUser.value.length}/50`;
+    postTitleValidationMessageNode.classList.remove('overLength');
+    postTitleFromUser.classList.remove('borderRed');
+  }
+  if (postTitleFromUser.value.length > 50) {
+    postTitleValidationMessageNode.classList.add('overLength');
+    postTitleFromUser.classList.add('borderRed');
+  }
+}
+
+function submitFormByClick() {
+  getPostFromUser(postTitleFromUser, postTextFromUser);
+  if (validationPassed(post)) {
+    createPost(post);
+    renderPosts(postsList);
+    resetValidationMessages(
+      postTitleValidationMessageNode,
+      postTextValidationMessageNode
+    );
+    hideErrorMessage(inputErrorMessageNode);
+  } else showSubmitErrorMessage(inputErrorMessageNode);
+}
+
+function submitFormByCltrlEnterInTitleInput(event) {
+  if (event.which == '13') event.preventDefault();
+  if (event.which == '13' && event.ctrlKey) {
+    event.preventDefault();
+    getPostFromUser(postTitleFromUser, postTextFromUser);
+    if (validationPassed(post)) {
+      createPost(post);
+      renderPosts(postsList);
+      resetValidationMessages(
+        postTitleValidationMessageNode,
+        postTextValidationMessageNode
+      );
+      hideErrorMessage(inputErrorMessageNode);
+    } else showSubmitErrorMessage(inputErrorMessageNode);
+  }
+}
+
+function submitFormByCtrlEnterInTextInput(event) {
+  if (event.which == '13' && event.ctrlKey) {
+    event.preventDefault();
+    getPostFromUser(postTitleFromUser, postTextFromUser);
+    if (validationPassed(post)) {
+      createPost(post);
+      renderPosts(postsList);
+      resetValidationMessages(
+        postTitleValidationMessageNode,
+        postTextValidationMessageNode
+      );
+      hideErrorMessage(inputErrorMessageNode);
+    } else showSubmitErrorMessage(inputErrorMessageNode);
+  }
+}
+
+function clearLocalStorageAndRefreshLayout() {
+  localStorage.clear();
+  renderPosts((postsList = []));
+  postsNode.innerHTML = POSTS_EMPTY_REFRESH_HTML;
+  postListClearBtnNode.classList.add('invisible');
 }
