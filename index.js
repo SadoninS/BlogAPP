@@ -1,3 +1,9 @@
+const POSTS_LIST_LOCAL_STORAGE_KEY = 'postlist';
+const POSTS_EMPTY_INIT_MESSAGE =
+  '<h3 class="emptyPosts">Тут пока ничего нет... </h3>';
+const POST_EMPTY_REFRESH_MESSAGE =
+  '<h3 class="emptyPosts">Ah, shit, here we go again...</h3>';
+
 const postTitleFromUser = document.querySelector('#post-title-input');
 const postTextFromUser = document.querySelector('#post-text-input');
 
@@ -10,17 +16,12 @@ const postTextValidationMessage = document.querySelector(
 
 const inputErrorMessage = document.querySelector('#inputErrorMessage');
 
-const publishBtn = document.querySelector('#post-publish-btn');
+const publishBtnNode = document.querySelector('#post-publish-btn');
 
 const postListClearBtnNode = document.querySelector('#clearPostsList');
 
-const POST_EMPTY_iINIT_MESSAGE =
-  '<h3 class="emptyPosts">Тут пока ничего нет... </h3>';
-const POST_EMPTY_REFRESH_MESSAGE =
-  '<h3 class="emptyPosts">Ah, shit, here we go again...</h3>';
-
 const postsNode = document.querySelector('#posts');
-postsNode.innerHTML = POST_EMPTY_iINIT_MESSAGE;
+postsNode.innerHTML = POSTS_EMPTY_INIT_MESSAGE;
 
 postListClearBtnNode.addEventListener('click', function () {
   localStorage.clear();
@@ -29,22 +30,9 @@ postListClearBtnNode.addEventListener('click', function () {
   postListClearBtnNode.classList.add('invisible');
 });
 
-let postsList = [];
-let postListStorage = localStorage.getItem('postlist');
-postListStorage = JSON.parse(localStorage.getItem('postlist'));
-
+// let postsList = [];
+let postListStorage = localStorage.getItem(POSTS_LIST_LOCAL_STORAGE_KEY);
 checkStorageAndInitPostsList();
-
-function renderPosts(postsList) {
-  postsNode.innerHTML = postsList.join('');
-}
-function checkStorageAndInitPostsList() {
-  if (Array.isArray(postListStorage)) {
-    postsList = postListStorage;
-    renderPosts(postsList);
-    postListClearBtnNode.classList.remove('invisible');
-  } else postsList = [];
-}
 
 const post = {
   date: '',
@@ -78,7 +66,7 @@ postTextFromUser.addEventListener('input', function () {
   }
 });
 
-publishBtn.addEventListener('click', function () {
+publishBtnNode.addEventListener('click', function () {
   getPostFromUser(postTitleFromUser, postTextFromUser);
   if (validationPassed(post)) {
     createPost(post);
@@ -123,3 +111,18 @@ postTextFromUser.addEventListener('keydown', function (event) {
     } else showSubmitErrorMessage(inputErrorMessage);
   }
 });
+
+function renderPosts(postsList) {
+  postsNode.innerHTML = postsList.join('');
+}
+
+function checkStorageAndInitPostsList() {
+  postListStorage = JSON.parse(
+    localStorage.getItem(POSTS_LIST_LOCAL_STORAGE_KEY)
+  );
+  if (Array.isArray(postListStorage)) {
+    postsList = postListStorage;
+    renderPosts(postsList);
+    postListClearBtnNode.classList.remove('invisible');
+  } else postsList = [];
+}
