@@ -226,4 +226,22 @@ form {
     top: 0px;
     left: 100px;
   }
+
+  .post-date {
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  .post-title {
+    margin-bottom: 10px;
+    font-size: 25px;
+    line-height: 30px;
+  }
+
+  .post-text {
+    margin-bottom: 30px;
+    font-size: 20px;
+    line-height: 25px;
+  }
 }
