@@ -33,11 +33,18 @@ let postsList = [];
 let postListStorage = localStorage.getItem('postlist');
 postListStorage = JSON.parse(localStorage.getItem('postlist'));
 
-if (Array.isArray(postListStorage)) {
-  postsList = postListStorage;
-  renderPosts(postsList);
-  postListClearBtnNode.classList.remove('invisible');
-} else postsList = [];
+checkStorageAndInitPostsList();
+
+function renderPosts(postsList) {
+  postsNode.innerHTML = postsList.join('');
+}
+function checkStorageAndInitPostsList() {
+  if (Array.isArray(postListStorage)) {
+    postsList = postListStorage;
+    renderPosts(postsList);
+    postListClearBtnNode.classList.remove('invisible');
+  } else postsList = [];
+}
 
 const post = {
   date: '',
@@ -70,10 +77,6 @@ postTextFromUser.addEventListener('input', function () {
     postTextFromUser.classList.add('borderRed');
   }
 });
-
-function renderPosts(postsList) {
-  postsNode.innerHTML = postsList.join('');
-}
 
 publishBtn.addEventListener('click', function () {
   getPostFromUser(postTitleFromUser, postTextFromUser);
