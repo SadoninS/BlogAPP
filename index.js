@@ -14,18 +14,18 @@ const publishBtn = document.querySelector('#post-publish-btn');
 
 const postListClearBtnNode = document.querySelector('#clearPostsList');
 
-let postsEmptyStartMessage =
+const POST_EMPTY_iINIT_MESSAGE =
   '<h3 class="emptyPosts">Тут пока ничего нет... </h3>';
-let postsEmptyRefreshMessage =
+const POST_EMPTY_REFRESH_MESSAGE =
   '<h3 class="emptyPosts">Ah, shit, here we go again...</h3>';
 
 const postsNode = document.querySelector('#posts');
-postsNode.innerHTML = postsEmptyStartMessage;
+postsNode.innerHTML = POST_EMPTY_iINIT_MESSAGE;
 
 postListClearBtnNode.addEventListener('click', function () {
   localStorage.clear();
   renderPosts((postsList = []));
-  postsNode.innerHTML = postsEmptyRefreshMessage;
+  postsNode.innerHTML = POST_EMPTY_REFRESH_MESSAGE;
   postListClearBtnNode.classList.add('invisible');
 });
 
