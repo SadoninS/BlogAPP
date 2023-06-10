@@ -69,7 +69,7 @@ form {
   line-height: 39px;
 }
 
-.post-publish-btn {
+.post-submit-btn {
   width: 100%;
   padding: 5px 10px;
   font-size: 28px;
@@ -79,7 +79,7 @@ form {
   cursor: pointer;
 }
 
-.post-publish-btn:before {
+.post-submit-btn:before {
   content: 'Опубликовать (Ctrl+Enter)';
   font-size: 28px;
   line-height: 39px;
@@ -160,6 +160,8 @@ form {
   opacity: 0;
 }
 
+/* немного адаптива */
+
 @media (max-width: 768px) {
   h1 {
     margin-bottom: 15px;
@@ -201,7 +203,7 @@ form {
     line-height: 30px;
   }
 
-  .post-publish-btn:before {
+  .post-submit-btn:before {
     cursor: pointer;
     content: 'Опубликовать';
     font-size: 28px;

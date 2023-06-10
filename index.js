@@ -1,26 +1,24 @@
 const POSTS_LIST_LOCAL_STORAGE_KEY = 'postlist';
+const POST_TITLE_VALIDATION_MESSAGE = '0/50';
+const POST_TEXT_VALIDATION_MESSAGE = '0/500';
 const POSTS_EMPTY_INIT_HTML =
   '<h3 class="emptyPosts">Тут пока ничего нет... </h3>';
 const POSTS_EMPTY_REFRESH_HTML =
   '<h3 class="emptyPosts">Ah, shit, here we go again...</h3>';
 
-const postTitleFromUser = document.querySelector('#post-title-input');
-const postTextFromUser = document.querySelector('#post-text-input');
-
+const postTitleFromUserNode = document.querySelector('#post-title-input');
+const postTextFromUserNode = document.querySelector('#post-text-input');
 const postTitleValidationMessageNode = document.querySelector(
   '#post-title-validation-message'
 );
 const postTextValidationMessageNode = document.querySelector(
   '#post-text-validation-message'
 );
-const publishBtnNode = document.querySelector('#post-publish-btn');
+const submitBtnNode = document.querySelector('#post-submit-btn');
 const inputErrorMessageNode = document.querySelector('#inputErrorMessage');
-
 const postListClearBtnNode = document.querySelector('#clearPostsList');
-
 const postsNode = document.querySelector('#posts');
 postsNode.innerHTML = POSTS_EMPTY_INIT_HTML;
-
 let postListStorage = localStorage.getItem(POSTS_LIST_LOCAL_STORAGE_KEY);
 checkStorageAndInitPostsList();
 const post = {
@@ -29,17 +27,17 @@ const post = {
   text: '',
 };
 
-publishBtnNode.addEventListener('click', (e) => submitFormByClick(e));
+postTitleFromUserNode.addEventListener('input', (e) => validateTitleInput(e));
 
-postTitleFromUser.addEventListener('input', (e) => validationTitleInput(e));
+postTextFromUserNode.addEventListener('input', (e) => validateTextInput(e));
 
-postTitleFromUser.addEventListener('keydown', (e) =>
+submitBtnNode.addEventListener('click', (e) => submitFormByClick(e));
+
+postTitleFromUserNode.addEventListener('keydown', (e) =>
   submitFormByCltrlEnterInTitleInput(e)
 );
 
-postTextFromUser.addEventListener('input', (e) => validationTextInput(e));
-
-postTextFromUser.addEventListener('keydown', (e) =>
+postTextFromUserNode.addEventListener('keydown', (e) =>
   submitFormByCtrlEnterInTextInput(e)
 );
 
