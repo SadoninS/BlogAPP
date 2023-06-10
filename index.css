@@ -12,6 +12,7 @@ button {
   font-style: normal;
   font-weight: 400;
   border: none;
+  border-radius: 5px;
 }
 
 h1 {
