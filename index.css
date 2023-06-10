@@ -220,4 +220,10 @@ form {
     font-size: 22px;
     line-height: 30px;
   }
+
+  .clearPostsListBtn {
+    position: absolute;
+    top: 0px;
+    left: 100px;
+  }
 }
