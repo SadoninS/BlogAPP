@@ -163,6 +163,12 @@ form {
 }
 
 @media (max-width: 768px) {
+  h1 {
+    margin-bottom: 15px;
+    font-size: 45px;
+    line-height: 50px;
+  }
+
   main {
     flex-direction: column;
     padding-inline: 25px;
