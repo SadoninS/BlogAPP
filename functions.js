@@ -21,11 +21,11 @@ function validateTitleInput() {
 function validateTextInput() {
   inputErrorMessageNode.classList.add('invisible');
   if (postTextFromUserNode.value.length >= 0) {
-    postTextValidationMessageNode.innerText = `${postTextFromUserNode.value.length}/1000`;
+    postTextValidationMessageNode.innerText = `${postTextFromUserNode.value.length}/500`;
     postTextValidationMessageNode.classList.remove('overLength');
     postTextFromUserNode.classList.remove('borderRed');
   }
-  if (postTextFromUserNode.value.length > 1000) {
+  if (postTextFromUserNode.value.length > 500) {
     postTextValidationMessageNode.classList.add('overLength');
     postTextFromUserNode.classList.add('borderRed');
   }
@@ -36,7 +36,7 @@ function emptyStringValidation(post) {
 }
 
 function lengthValidation(post) {
-  return post.title.length <= 50 && post.text.length <= 1000;
+  return post.title.length <= 50 && post.text.length <= 500;
 }
 
 function validationPassed(post) {
