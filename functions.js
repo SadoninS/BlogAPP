@@ -121,7 +121,7 @@ function getPostFromUser(postTitleFromUserNode, postTextFromUserNode) {
   post.date = dt.toLocaleString('ru', dtOptions);
   post.title = postTitleFromUserNode.value.trim();
   post.text = postTextFromUserNode.value.trim();
-  post.text = postTextFromUserNode.value.replace(/\n/, '<br/>');
+  post.text = postTextFromUserNode.value.replace(/\n/g, '<br/>');
 
   return post;
 }
