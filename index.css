@@ -157,7 +157,7 @@ form {
 }
 
 .invisible {
-  opacity: 0;
+  display: none;
 }
 
 /* немного адаптива */
