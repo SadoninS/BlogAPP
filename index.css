@@ -160,6 +160,10 @@ form {
   display: none;
 }
 
+.opacity {
+  opacity: 0;
+}
+
 /* немного адаптива */
 
 @media (max-width: 768px) {

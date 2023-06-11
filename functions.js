@@ -6,7 +6,7 @@ function clearLocalStorageAndRefreshLayout() {
 }
 
 function validateTitleInput() {
-  inputErrorMessageNode.classList.add('invisible');
+  inputErrorMessageNode.classList.add('opacity');
   if (postTitleFromUserNode.value.length >= 0) {
     postTitleValidationMessageNode.innerText = `${postTitleFromUserNode.value.length}/50`;
     postTitleValidationMessageNode.classList.remove('overLength');
@@ -19,7 +19,7 @@ function validateTitleInput() {
 }
 
 function validateTextInput() {
-  inputErrorMessageNode.classList.add('invisible');
+  inputErrorMessageNode.classList.add('opacity');
   if (postTextFromUserNode.value.length >= 0) {
     postTextValidationMessageNode.innerText = `${postTextFromUserNode.value.length}/500`;
     postTextValidationMessageNode.classList.remove('overLength');
@@ -55,12 +55,12 @@ function resetValidationMessages(
 
 function showSubmitErrorMessage(inputErrorMessageNode) {
   if (!validationPassed(post)) {
-    inputErrorMessageNode.classList.remove('invisible');
+    inputErrorMessageNode.classList.remove('opacity');
   }
 }
 
 function hideSubmitErrorMessage(inputErrorMessageNode) {
-  inputErrorMessageNode.classList.add('invisible');
+  inputErrorMessageNode.classList.add('opacity');
 }
 
 function submitFormByClick() {
