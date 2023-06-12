@@ -182,6 +182,11 @@ form {
     flex-direction: column;
     padding: 0 25px;
   }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
   section {
     width: 100%;
   }
