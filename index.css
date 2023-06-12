@@ -180,7 +180,7 @@ form {
 
   main {
     flex-direction: column;
-    padding-inline: 25px;
+    padding: 0 25px;
   }
   section {
     width: 100%;
