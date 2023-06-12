@@ -182,11 +182,7 @@ form {
     flex-direction: column;
     padding: 0 25px;
   }
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+
   section {
     width: 100%;
   }
@@ -222,8 +218,8 @@ form {
 
   .inputErrorMessage {
     margin-bottom: 10px;
-    font-size: 22px;
-    line-height: 30px;
+    font-size: 20px;
+    line-height: 25px;
     color: red;
   }
 
