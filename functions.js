@@ -77,8 +77,8 @@ function submitFormByClick() {
 }
 
 function submitFormByCltrlEnterInTitleInput(event) {
-  if (event.which == '13') event.preventDefault();
-  if (event.which == '13' && event.ctrlKey) {
+  if (event.keyCode == '13') event.preventDefault();
+  if (event.keyCode == '13' && event.ctrlKey) {
     event.preventDefault();
     getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
     if (validationPassed(post)) {
@@ -94,7 +94,7 @@ function submitFormByCltrlEnterInTitleInput(event) {
 }
 
 function submitFormByCtrlEnterInTextInput(event) {
-  if (event.which == '13' && event.ctrlKey) {
+  if (event.keyCode == '13' && event.ctrlKey) {
     event.preventDefault();
     getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
     if (validationPassed(post)) {
