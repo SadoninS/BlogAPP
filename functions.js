@@ -133,8 +133,9 @@ function createPost(post) {
                               <p class='post-text'>${post.text}</p>
                             </div>`)
   );
-  const postListStorage = JSON.stringify(postsList);
-  localStorage.setItem(POSTS_LIST_LOCAL_STORAGE_KEY, postListStorage);
+
+  postsListStorage = JSON.stringify(postsList);
+  localStorage.setItem(POSTS_LIST_LOCAL_STORAGE_KEY, postsListStorage);
   postTitleFromUserNode.value = '';
   postTextFromUserNode.value = '';
   postListClearBtnNode.classList.remove('invisible');

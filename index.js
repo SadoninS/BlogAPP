@@ -19,7 +19,8 @@ const inputErrorMessageNode = document.querySelector('#inputErrorMessage');
 const postListClearBtnNode = document.querySelector('#clearPostsList');
 const postsNode = document.querySelector('#posts');
 postsNode.innerHTML = POSTS_EMPTY_INIT_HTML;
-let postListStorage = localStorage.getItem(POSTS_LIST_LOCAL_STORAGE_KEY);
+let postsList = [];
+let postsListStorage = localStorage.getItem(POSTS_LIST_LOCAL_STORAGE_KEY);
 checkStorageAndInitPostsList();
 const post = {
   date: '',
@@ -48,14 +49,16 @@ postListClearBtnNode.addEventListener('click', (e) =>
 //Сломал весь мозг на том, как унести нижеследующие функции в другой файл, но понял что нужно переписать логику всего приложения и добиться чистоты функций, посему эти функции поживут здесь.
 
 function checkStorageAndInitPostsList() {
-  postListStorage = JSON.parse(
+  let postsListStorage = JSON.parse(
     localStorage.getItem(POSTS_LIST_LOCAL_STORAGE_KEY)
   );
-  if (Array.isArray(postListStorage)) {
-    postsList = postListStorage;
-    renderPosts(postsList);
-    postListClearBtnNode.classList.remove('invisible');
-  } else postsList = [];
+  const postsList = Array.isArray(postsListStorage) ? postsListStorage : [];
+  // if (Array.isArray(postListStorage)) {
+  //   postsList = postListStorage;
+  // renderPosts(postsList);
+  //   postListClearBtnNode.classList.remove('invisible');
+  // } else postsList = [];
+  return postsList;
 }
 
 function renderPosts(postsList) {
