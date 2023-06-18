@@ -229,12 +229,6 @@ form {
     line-height: 30px;
   }
 
-  .clearPostsListBtn {
-    position: absolute;
-    top: 0px;
-    left: 100px;
-  }
-
   .post-date {
     margin-bottom: 10px;
     font-size: 18px;
