@@ -95,14 +95,12 @@ form {
 
 /* output */
 .output-area__title {
-  position: relative;
+  display: inline;
   display: flex;
 }
 
 .clearPostsListBtn {
-  position: absolute;
-  top: 7px;
-  left: 125px;
+  margin-left: 20px;
   padding: 5px 10px;
   font-size: 20px;
   line-height: 25px;
@@ -117,10 +115,13 @@ form {
   flex-direction: column-reverse;
 }
 
-.emptyPosts {
+.postsSubtitle {
+  margin-bottom: 25px;
+  width: fit-content;
   font-size: 32px;
   line-height: 40px;
   opacity: 0.5;
+  border-bottom: 1px solid grey;
 }
 
 .post-date {

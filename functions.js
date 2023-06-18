@@ -1,7 +1,18 @@
+function initApp() {
+  if (postsListStorage === null) {
+    postsDescription.innerText = POSTS_DESCRIPTION_INIT_TEXT;
+  } else {
+    renderPosts(postsList);
+    postsDescription.innerText = POSTS_DESCRIPTION_TEXT;
+    postListClearBtnNode.classList.remove('invisible');
+  }
+}
+
 function clearLocalStorageAndRefreshLayout() {
   localStorage.clear();
-  renderPosts((postsList = []));
-  postsNode.innerHTML = POSTS_EMPTY_REFRESH_HTML;
+  postsNode.innerHTML = '';
+  postsList = [];
+  postsDescription.innerText = POSTS_DESCRIPTION_REFRESH_TEXT;
   postListClearBtnNode.classList.add('invisible');
 }
 
@@ -43,10 +54,7 @@ function validationPassed(post) {
   return lengthValidation(post) && emptyStringValidation(post);
 }
 
-function resetValidationMessages(
-  postTitleValidationMessageNode,
-  postTextValidationMessageNode
-) {
+function resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode) {
   postTitleValidationMessageNode.innerText = POST_TITLE_VALIDATION_MESSAGE;
   postTextValidationMessageNode.innerText = POST_TEXT_VALIDATION_MESSAGE;
   postTitleValidationMessageNode.classList.remove('overLength');
@@ -66,12 +74,9 @@ function hideSubmitErrorMessage(inputErrorMessageNode) {
 function submitFormByClick() {
   getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
   if (validationPassed(post)) {
-    createPost(post);
+    setPost(post);
     renderPosts(postsList);
-    resetValidationMessages(
-      postTitleValidationMessageNode,
-      postTextValidationMessageNode
-    );
+    resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
     hideSubmitErrorMessage(inputErrorMessageNode);
   } else showSubmitErrorMessage(inputErrorMessageNode);
 }
@@ -82,12 +87,9 @@ function submitFormByCltrlEnterInTitleInput(event) {
     event.preventDefault();
     getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
     if (validationPassed(post)) {
-      createPost(post);
+      setPost(post);
       renderPosts(postsList);
-      resetValidationMessages(
-        postTitleValidationMessageNode,
-        postTextValidationMessageNode
-      );
+      resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
       hideSubmitErrorMessage(inputErrorMessageNode);
     } else showSubmitErrorMessage(inputErrorMessageNode);
   }
@@ -98,12 +100,9 @@ function submitFormByCtrlEnterInTextInput(event) {
     event.preventDefault();
     getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
     if (validationPassed(post)) {
-      createPost(post);
+      setPost(post);
       renderPosts(postsList);
-      resetValidationMessages(
-        postTitleValidationMessageNode,
-        postTextValidationMessageNode
-      );
+      resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
       hideSubmitErrorMessage(inputErrorMessageNode);
     } else showSubmitErrorMessage(inputErrorMessageNode);
   }
@@ -125,18 +124,34 @@ function getPostFromUser(postTitleFromUserNode, postTextFromUserNode) {
 
   return post;
 }
-function createPost(post) {
-  postsList.push(
-    (postsNode.innerHTML = `<div class="post">
-                              <p class='post-date'>${post.date}</p>
-                              <h3 class='post-title'>${post.title}</h3>
-                              <p class='post-text'>${post.text}</p>
-                            </div>`)
-  );
 
-  postsListStorage = JSON.stringify(postsList);
-  localStorage.setItem(POSTS_LIST_LOCAL_STORAGE_KEY, postsListStorage);
+function setPost(post) {
+  let newPost = {
+    date: post.date,
+    title: post.title,
+    text: post.text,
+  };
+
+  postsList.push(newPost);
+
   postTitleFromUserNode.value = '';
   postTextFromUserNode.value = '';
   postListClearBtnNode.classList.remove('invisible');
+
+  postsListStorage = JSON.stringify(postsList);
+  localStorage.setItem(POSTS_LIST_LOCAL_STORAGE_KEY, postsListStorage);
+  postsDescription.innerText = POSTS_DESCRIPTION_TEXT;
+}
+
+function renderPosts(postsList) {
+  postsNode.innerHTML = '';
+  postsList.forEach((post) => {
+    let postHTML = document.createElement('li');
+    postHTML.classList.add('post');
+    postHTML.innerHTML = `
+    <p class="post-date">${post.date}</p>
+    <p class="post-title">${post.title}</p>
+    <p class="post-text">${post.text}</p>`;
+    postsNode.appendChild(postHTML);
+  });
 }
