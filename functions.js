@@ -53,6 +53,14 @@ function resetValidationMessages(postTitleValidationMessageNode, postTextValidat
   postTextValidationMessageNode.classList.remove('overLength');
 }
 
+function clearLocalStorageAndRefreshLayout() {
+  localStorage.clear();
+  postsNode.innerHTML = '';
+  postsList = [];
+  postsDescription.innerText = POSTS_DESCRIPTION_REFRESH_TEXT;
+  postListClearBtnNode.classList.add('invisible');
+}
+
 function showSubmitErrorMessage(inputErrorMessageNode) {
   if (!validationPassed(post)) {
     inputErrorMessageNode.classList.remove('opacity');
@@ -109,14 +117,6 @@ function renderPosts(postsList) {
     <p class="post-text">${post.text}</p>`;
     postsNode.appendChild(postHTML);
   });
-}
-
-function clearLocalStorageAndRefreshLayout() {
-  localStorage.clear();
-  postsNode.innerHTML = '';
-  postsList = [];
-  postsDescription.innerText = POSTS_DESCRIPTION_REFRESH_TEXT;
-  postListClearBtnNode.classList.add('invisible');
 }
 
 function submitFormByClick() {
