@@ -14,12 +14,12 @@ const inputErrorMessageNode = document.querySelector('#inputErrorMessage');
 const postListClearBtnNode = document.querySelector('#clearPostsList');
 const postsNode = document.querySelector('#posts');
 const postsDescription = document.querySelector('#postsDescription');
+
 let post = {
   date: '',
   title: '',
   text: '',
 };
-
 let postsListStorage = JSON.parse(localStorage.getItem(POSTS_LIST_LOCAL_STORAGE_KEY));
 let postsList = Array.isArray(postsListStorage) ? postsListStorage : [];
 

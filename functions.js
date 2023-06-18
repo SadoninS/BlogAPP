@@ -8,14 +8,6 @@ function initApp() {
   }
 }
 
-function clearLocalStorageAndRefreshLayout() {
-  localStorage.clear();
-  postsNode.innerHTML = '';
-  postsList = [];
-  postsDescription.innerText = POSTS_DESCRIPTION_REFRESH_TEXT;
-  postListClearBtnNode.classList.add('invisible');
-}
-
 function validateTitleInput() {
   inputErrorMessageNode.classList.add('opacity');
   if (postTitleFromUserNode.value.length >= 0) {
@@ -71,43 +63,6 @@ function hideSubmitErrorMessage(inputErrorMessageNode) {
   inputErrorMessageNode.classList.add('opacity');
 }
 
-function submitFormByClick() {
-  getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
-  if (validationPassed(post)) {
-    setPost(post);
-    renderPosts(postsList);
-    resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
-    hideSubmitErrorMessage(inputErrorMessageNode);
-  } else showSubmitErrorMessage(inputErrorMessageNode);
-}
-
-function submitFormByCltrlEnterInTitleInput(event) {
-  if (event.keyCode == '13') event.preventDefault();
-  if (event.keyCode == '13' && event.ctrlKey) {
-    event.preventDefault();
-    getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
-    if (validationPassed(post)) {
-      setPost(post);
-      renderPosts(postsList);
-      resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
-      hideSubmitErrorMessage(inputErrorMessageNode);
-    } else showSubmitErrorMessage(inputErrorMessageNode);
-  }
-}
-
-function submitFormByCtrlEnterInTextInput(event) {
-  if (event.keyCode == '13' && event.ctrlKey) {
-    event.preventDefault();
-    getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
-    if (validationPassed(post)) {
-      setPost(post);
-      renderPosts(postsList);
-      resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
-      hideSubmitErrorMessage(inputErrorMessageNode);
-    } else showSubmitErrorMessage(inputErrorMessageNode);
-  }
-}
-
 function getPostFromUser(postTitleFromUserNode, postTextFromUserNode) {
   const dt = new Date();
   const dtOptions = {
@@ -154,4 +109,49 @@ function renderPosts(postsList) {
     <p class="post-text">${post.text}</p>`;
     postsNode.appendChild(postHTML);
   });
+}
+
+function clearLocalStorageAndRefreshLayout() {
+  localStorage.clear();
+  postsNode.innerHTML = '';
+  postsList = [];
+  postsDescription.innerText = POSTS_DESCRIPTION_REFRESH_TEXT;
+  postListClearBtnNode.classList.add('invisible');
+}
+
+function submitFormByClick() {
+  getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
+  if (validationPassed(post)) {
+    setPost(post);
+    renderPosts(postsList);
+    resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
+    hideSubmitErrorMessage(inputErrorMessageNode);
+  } else showSubmitErrorMessage(inputErrorMessageNode);
+}
+
+function submitFormByCltrlEnterInTitleInput(event) {
+  if (event.keyCode == '13') event.preventDefault();
+  if (event.keyCode == '13' && event.ctrlKey) {
+    event.preventDefault();
+    getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
+    if (validationPassed(post)) {
+      setPost(post);
+      renderPosts(postsList);
+      resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
+      hideSubmitErrorMessage(inputErrorMessageNode);
+    } else showSubmitErrorMessage(inputErrorMessageNode);
+  }
+}
+
+function submitFormByCtrlEnterInTextInput(event) {
+  if (event.keyCode == '13' && event.ctrlKey) {
+    event.preventDefault();
+    getPostFromUser(postTitleFromUserNode, postTextFromUserNode);
+    if (validationPassed(post)) {
+      setPost(post);
+      renderPosts(postsList);
+      resetValidationMessages(postTitleValidationMessageNode, postTextValidationMessageNode);
+      hideSubmitErrorMessage(inputErrorMessageNode);
+    } else showSubmitErrorMessage(inputErrorMessageNode);
+  }
 }
